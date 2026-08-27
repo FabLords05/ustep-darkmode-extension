@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "USTP Dark Mode",
+  "version": "1.0.0",
+  "description": "Applies a custom dark mode theme to the USTP portal.",
+  "permissions": ["storage", "tabs"],
+  "icons": {
+    "16": "icons/U.svg",
+    "48": "icons/U.svg",
+    "128": "icons/U.svg"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/U.svg",
+      "48": "icons/U.svg",
+      "128": "icons/U.svg"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://ustep.ustp.edu.ph/*"],
+      "css": ["darkmode_v2.css"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

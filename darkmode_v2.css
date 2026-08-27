@@ -1,0 +1,638 @@
+/* 
+   USTP Soft Dark Theme
+   Uses deep slate and navy tones to compliment the original UI
+*/
+
+:root {
+    --bg-main: #1b1b28;       
+    --bg-card: #252536;       
+    --text-main: #cdd0d5;     
+    --text-heading: #eceef1;  
+    --border-color: #38384f;  
+}
+
+/* --- DASHBOARD BACKGROUND (THE BULLETPROOF METHOD) --- */
+/* 1. Create a locked background layer that physically cannot scroll */
+html.dark-mode-active body:not(.lambda-login)::before {
+    content: "";
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-image: url('https://ustep.ustp.edu.ph/pluginfile.php/1/theme_lambda2/page_bg_img/1787790906/codioful-formerly-gradienta-OzfD79w8ptA-unsplash.jpg') !important;
+    background-size: cover !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    z-index: -9999 !important; /* Shoves it behind all the content */
+}
+
+/* 2. Strip the broken scrolling background off the actual body tag */
+html.dark-mode-active body:not(.lambda-login) {
+    background-image: none !important;
+    background-color: transparent !important;
+}
+
+/* 3. Keep the center content column solid dark */
+html.dark-mode-active .layout-boxed #page,
+html.dark-mode-active .layout-boxed #page-wrapper,
+html.dark-mode-active .layout-boxed #region-main {
+    background-color: var(--bg-main) !important;
+    background-image: none !important;
+}
+
+/* Apply main background and text globally */
+html.dark-mode-active,
+html.dark-mode-active body,
+html.dark-mode-active .layout-boxed,
+html.dark-mode-active #page,
+html.dark-mode-active #page-wrapper,
+html.dark-mode-active .card,
+html.dark-mode-active .bg-white,
+html.dark-mode-active .bg-light,
+html.dark-mode-active [role="main"],
+html.dark-mode-active #page-content,
+html.dark-mode-active #region-main,
+html.dark-mode-active .block,
+html.dark-mode-active .card-body,
+html.dark-mode-active .list-group-item,
+html.dark-mode-active .well {
+    background-color: var(--bg-main) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Target the white header containers and cards specifically with the slightly lighter slate */
+html.dark-mode-active .layout-boxed #main-header #header-logo,
+html.dark-mode-active #lambda-page-header,
+html.dark-mode-active #page-header,
+html.dark-mode-active .header-maxwidth {
+    background-color: var(--bg-card) !important;
+    background-image: none !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix the white edges wrapper on the secondary navigation bar */
+html.dark-mode-active .lambda-nav,
+html.dark-mode-active .lambda-nav.style-0,
+html.dark-mode-active .lambda-nav.style-1 {
+    background-color: var(--bg-card) !important;
+    background: var(--bg-card) !important;
+    border: none !important;
+}
+
+/* Fix text, lists, and standard typography */
+html.dark-mode-active p,
+html.dark-mode-active span,
+html.dark-mode-active li,
+html.dark-mode-active label,
+html.dark-mode-active .text-muted,
+html.dark-mode-active .dimmed_text {
+    color: var(--text-main) !important;
+}
+
+/* Make headings pop slightly more than body text */
+html.dark-mode-active h1,
+html.dark-mode-active h2,
+html.dark-mode-active h3,
+html.dark-mode-active h4,
+html.dark-mode-active h5,
+html.dark-mode-active h6,
+html.dark-mode-active .page-header-headings h1,
+html.dark-mode-active .block .header h2 {
+    color: var(--text-heading) !important;
+}
+
+/* Soft blue for links so they stand out on the slate background */
+html.dark-mode-active a {
+    color: #82aaff !important; 
+}
+
+/* Ensure the USTP logo still stands out properly */
+/* A much softer, tighter glow for readability without the glare */
+/* Creates a solid, sharp 1px white outline tracing the logo */
+html.dark-mode-active #main-header img {
+    background-color: transparent !important;
+    padding: 0 !important;
+    
+    /* 4 sharp shadows (no blur) pulling in 4 different directions to form a stroke */
+    filter: 
+        drop-shadow(1px 1px 0px #ffffff) 
+        drop-shadow(-1px -1px 0px #ffffff) 
+        drop-shadow(1px -1px 0px #ffffff) 
+        drop-shadow(-1px 1px 0px #ffffff) !important;
+}
+
+/* Form controls and input boxes */
+html.dark-mode-active input,
+html.dark-mode-active select,
+html.dark-mode-active textarea,
+html.dark-mode-active .form-control,
+html.dark-mode-active .btn-secondary,
+html.dark-mode-active .btn-default {
+    background-color: #2e2e42 !important;
+    color: var(--text-heading) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Keep primary buttons readable */
+html.dark-mode-active .btn-primary {
+    background-color: #26235b !important; /* Matches USTP deep blue */
+    border-color: #26235b !important;
+    color: #ffffff !important;
+}
+
+/* Make skeleton loading placeholders subtle and dark */
+html.dark-mode-active .placeholder,
+html.dark-mode-active .skeleton,
+html.dark-mode-active .placeholder-glow .placeholder,
+html.dark-mode-active [data-region="loading-placeholder-content"],
+html.dark-mode-active [data-region="loading-placeholder-content"] * {
+    background-color: var(--border-color) !important; /* Uses the soft #38384f from your :root */
+    color: transparent !important;
+}
+
+/* Ensure the pulsing animation still looks good but stays dark */
+html.dark-mode-active .placeholder-wave {
+    -webkit-mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.3) 75%, #000 95%);
+    mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.3) 75%, #000 95%);
+}
+
+/* Target the specific Moodle Timeline and Block skeleton shapes */
+html.dark-mode-active .bg-pulse-grey,
+html.dark-mode-active [data-region="loading-placeholder-content"] .bg-white,
+html.dark-mode-active [data-region="loading-placeholder-content"] .bg-light,
+html.dark-mode-active [data-region="timeline"] .bg-white,
+html.dark-mode-active [data-region="timeline"] .bg-light,
+html.dark-mode-active .list-group-item .bg-white,
+html.dark-mode-active .list-group-item .bg-light,
+html.dark-mode-active .rounded-circle.bg-white,
+html.dark-mode-active .rounded.bg-white {
+    background-color: var(--border-color) !important;
+}
+
+/* Fix Calendar cell highlights, hover states, and today's date */
+html.dark-mode-active table.calendarmonth td:hover,
+html.dark-mode-active table.minicalendar td:hover,
+html.dark-mode-active table.calendarmonth td.today,
+html.dark-mode-active table.minicalendar td.today {
+    background-color: #2e2e42 !important; /* Slightly lighter slate for interaction */
+}
+
+/* Fix the blinding white event backgrounds inside the calendar */
+html.dark-mode-active .calendar_event_course,
+html.dark-mode-active .calendar_event_site,
+html.dark-mode-active .calendar_event_global,
+html.dark-mode-active .calendar_event_category,
+html.dark-mode-active .calendar_event_group,
+html.dark-mode-active .calendar_event_user,
+html.dark-mode-active .calendarmonth td .bg-primary,
+html.dark-mode-active .calendarmonth td .bg-light,
+html.dark-mode-active .calendarmonth td .bg-white {
+    background-color: #26235b !important; /* Deep navy blue for events */
+    color: var(--text-heading) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Ensure the event text and links remain readable */
+html.dark-mode-active .calendarmonth td .day-content a,
+html.dark-mode-active .minicalendar td a {
+    color: #82aaff !important; 
+    font-weight: 500;
+}
+
+/* Fix navigation dropdown menus and popups */
+html.dark-mode-active .dropdown-menu {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Fix the links inside the dropdown */
+html.dark-mode-active .dropdown-menu .dropdown-item,
+html.dark-mode-active .dropdown-menu a {
+    color: var(--text-main) !important;
+    background-color: transparent !important;
+}
+
+/* Add a subtle highlight when hovering over the menu items */
+html.dark-mode-active .dropdown-menu .dropdown-item:hover,
+html.dark-mode-active .dropdown-menu .dropdown-item:focus,
+html.dark-mode-active .dropdown-menu a:hover,
+html.dark-mode-active .dropdown-menu a:focus {
+    background-color: #2e2e42 !important; /* A slightly lighter slate to indicate hover */
+    color: var(--text-heading) !important;
+}
+
+/* Fix bright white tables (like the Grades and Courses tables) */
+html.dark-mode-active table.generaltable tbody th,
+html.dark-mode-active table.generaltable tbody td,
+html.dark-mode-active table.generaltable thead th {
+    background-color: var(--bg-card) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Optional: Add a subtle striped effect to make reading rows easier */
+html.dark-mode-active table.generaltable tbody tr:nth-of-type(even) th,
+html.dark-mode-active table.generaltable tbody tr:nth-of-type(even) td {
+    background-color: var(--bg-main) !important;
+}
+
+/* Fix hover states for table rows so they don't flash white */
+html.dark-mode-active table.generaltable tbody tr:hover th,
+html.dark-mode-active table.generaltable tbody tr:hover td {
+    background-color: #2e2e42 !important; /* Slightly lighter slate for row hover */
+}
+
+/* Fix the drag-and-drop file manager upload area */
+html.dark-mode-active .fm-empty-container,
+html.dark-mode-active .filemanager .dndupload-message,
+html.dark-mode-active .dndupload-target {
+    background-color: var(--bg-main) !important;
+    border: 2px dashed var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Ensure the big download/arrow icon matches your text color */
+html.dark-mode-active .fm-empty-container .dndupload-arrow,
+html.dark-mode-active .filemanager .dndupload-arrow {
+    color: var(--text-main) !important;
+}
+
+/* Fix the YUI File Picker popup dialogs */
+html.dark-mode-active .moodle-dialogue-base .moodle-dialogue-wrap,
+html.dark-mode-active .moodle-dialogue-base .moodle-dialogue-hd,
+html.dark-mode-active .moodle-dialogue-base .moodle-dialogue-bd,
+html.dark-mode-active .file-picker,
+html.dark-mode-active .fp-repo-area {
+    background-color: var(--bg-card) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix the sidebar navigation inside the file picker */
+html.dark-mode-active .fp-repo-area .nav-pills .nav-link {
+    background-color: transparent !important;
+    color: var(--text-main) !important;
+}
+
+/* Keep the active yellow selection readable */
+html.dark-mode-active .fp-repo-area .nav-pills .nav-link.active {
+    background-color: #f39c12 !important; /* Keep the Moodle orange/yellow */
+    color: #ffffff !important;
+}
+
+/* Fix the right-side content area where the inputs are */
+html.dark-mode-active .fp-content-center,
+html.dark-mode-active .fp-formset {
+    background-color: var(--bg-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix the white unselected buttons in the file picker sidebar */
+html.dark-mode-active .fp-repo-area .nav-pills .nav-link {
+    background-color: var(--bg-main) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Ensure the active yellow button stays yellow and doesn't get overridden */
+html.dark-mode-active .fp-repo-area .nav-pills .nav-link.active {
+    background-color: #f39c12 !important; 
+    color: #ffffff !important;
+    border-color: #f39c12 !important;
+}
+
+/* Fix the main right-side content area (like the "No files available" box) */
+html.dark-mode-active .fp-repo-items,
+html.dark-mode-active .fp-content,
+html.dark-mode-active .fp-content-error,
+html.dark-mode-active .fp-empty-container {
+    background-color: var(--bg-main) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* Fix the thin white gap (slider wrapper) below the navigation bar */
+html.dark-mode-active #fp-slider-wrapper {
+    background-color: transparent !important; 
+    border: none !important;
+}
+
+/* Fix the "Hello, Trailblazers!" Jumbotron welcome banner */
+html.dark-mode-active .jumbotron {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Ensure any secondary text inside the Jumbotron is also readable */
+html.dark-mode-active .jumbotron .lead {
+    color: var(--text-main) !important;
+}
+
+/* Fix Lambda Custom Content Blocks (removes inline white backgrounds and blue tints) */
+html.dark-mode-active .lambdacb.wrapper {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Strip away the hardcoded background tint/image */
+html.dark-mode-active .lambdacb.wrapper .bgimg {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Ensure the inner content area blends in */
+html.dark-mode-active .lambdacb.wrapper .content {
+    background-color: transparent !important;
+}
+
+/* Force the text inside these blocks to be readable */
+html.dark-mode-active .lambdacb.wrapper .content h1,
+html.dark-mode-active .lambdacb.wrapper .content h2,
+html.dark-mode-active .lambdacb.wrapper .content h3,
+html.dark-mode-active .lambdacb.wrapper .content h4,
+html.dark-mode-active .lambdacb.wrapper .content p,
+html.dark-mode-active .lambdacb.wrapper .content span,
+html.dark-mode-active .lambdacb.wrapper .content div {
+    color: var(--text-main) !important;
+}
+
+/* Fix the feature icon boxes with hardcoded inline beige backgrounds */
+/* Give the feature boxes a subtly distinct, slightly lighter slate color */
+html.dark-mode-active .iconbox,
+html.dark-mode-active .iconbox.style-02 {
+    background-color: #2a2a3d !important; /* A subtle step up from your standard card background */
+    border: 1px solid #43435c !important; /* A slightly softer border to match */
+    border-radius: 8px !important; /* Optional: smooths the corners out a bit */
+}
+
+/* Ensure the headings inside the feature boxes pop */
+html.dark-mode-active .iconbox .icon-content h1,
+html.dark-mode-active .iconbox .icon-content h2,
+html.dark-mode-active .iconbox .icon-content h3,
+html.dark-mode-active .iconbox .icon-content h4,
+html.dark-mode-active .iconbox .icon-content h5 {
+    color: var(--text-heading) !important;
+}
+
+/* Keep the description text a soft readable gray */
+html.dark-mode-active .iconbox .icon-content p {
+    color: var(--text-main) !important;
+}
+
+/* Fix the white background band behind the course navigation tabs */
+html.dark-mode-active .secondary-navigation,
+html.dark-mode-active .secondary-navigation .nav-tabs {
+    background-color: var(--bg-main) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Style the inactive tabs to blend in */
+html.dark-mode-active .secondary-navigation .nav-tabs .nav-link {
+    background-color: transparent !important;
+    color: var(--text-main) !important;
+    border-color: transparent !important;
+}
+
+/* Make the active tab stand out slightly */
+html.dark-mode-active .secondary-navigation .nav-tabs .nav-link.active {
+    background-color: var(--bg-card) !important;
+    color: var(--text-heading) !important;
+    border-color: var(--border-color) var(--border-color) transparent !important;
+}
+
+/* Fix the bright accordion headers (Vision, Mission, etc.) */
+html.dark-mode-active .accordion > .card > .card-header,
+html.dark-mode-active .accordion > .card > .card-header button[data-toggle="collapse"] {
+    background-color: var(--bg-card) !important;
+    color: var(--text-heading) !important;
+    border-color: var(--border-color) !important;
+    text-decoration: none !important;
+}
+
+/* Add a subtle hover effect to the accordion buttons */
+html.dark-mode-active .accordion > .card > .card-header button[data-toggle="collapse"]:hover {
+    background-color: #2a2a3d !important;
+}
+
+/* Style the normal pagination boxes to be a subtle, elevated slate */
+html.dark-mode-active .pagination li.page-item .page-link {
+    background-color: #2a2a3d !important; 
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Add a slight brightening effect when you hover over a page number */
+html.dark-mode-active .pagination li.page-item:not(.active) .page-link:hover {
+    background-color: #38384f !important;
+    color: var(--text-heading) !important;
+}
+
+/* Make the active page distinct using the USTP deep navy */
+html.dark-mode-active .pagination li.page-item.active .page-link {
+    background-color: #26235b !important;
+    border-color: var(--border-color) !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+/* Fix the "Skip to main content" accessibility link when it is focused via keyboard */
+html.dark-mode-active .sr-only-focusable:focus,
+html.dark-mode-active a.sr-only.sr-only-focusable:focus {
+    background-color: #26235b !important; /* USTP Deep Navy */
+    color: #ffffff !important;
+    border: 2px solid #82aaff !important; /* Soft blue border to make it pop */
+    padding: 10px 15px !important;
+    border-radius: 5px !important;
+    z-index: 10000 !important; /* Ensures it stays on top of the navbar */
+    text-decoration: none !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 2. Absolute override for the left login panel */
+html.dark-mode-active body .login-wrapper,
+html.dark-mode-active body div.login-container,
+html.dark-mode-active .lambda-login .login-container {
+    background-color: var(--bg-main) !important;
+    border-right: 1px solid var(--border-color) !important;
+    min-height: 100vh !important;
+}
+
+/* Ensure the main region behind the container is completely transparent */
+html.dark-mode-active body.lambda-login #region-main,
+html.dark-mode-active #page-login-index #region-main {
+    background-color: transparent !important;
+}
+
+/* 3. Darken the username and password input fields */
+html.dark-mode-active .login-container input[type="text"],
+html.dark-mode-active .login-container input[type="password"] {
+    background-color: var(--bg-card) !important;
+    color: var(--text-heading) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* 4. Ensure the text and labels remain readable */
+html.dark-mode-active .login-container,
+html.dark-mode-active .login-container h2,
+html.dark-mode-active .login-container h5,
+html.dark-mode-active .login-container p {
+    color: var(--text-main) !important;
+}
+
+/* --- LOGIN PAGE IMAGE RESTORATION --- */
+/* 1. Make all the giant background wrappers transparent so the image shows */
+html.dark-mode-active body.lambda-login,
+html.dark-mode-active body.lambda-login #page-wrapper,
+html.dark-mode-active body.lambda-login #page,
+html.dark-mode-active body.lambda-login .wrapper-lambda-outer,
+html.dark-mode-active body.lambda-login .wrapper-lambda,
+html.dark-mode-active body.lambda-login .login-wrapper {
+    background-color: transparent !important;
+    background-image: revert !important; 
+}
+
+/* 2. Force ONLY the specific login form container to stay dark */
+html.dark-mode-active body div.login-container,
+html.dark-mode-active .lambda-login .login-container {
+    background-color: var(--bg-main) !important;
+    border-right: 1px solid var(--border-color) !important;
+    min-height: 100vh !important;
+}
+/* ------------------------------------ */
+
+/* =========================================================
+   LOGIN PAGE: Retain Campus Collage & Darken Login Form Only
+   ========================================================= */
+
+/* --- LOGIN PAGE IMAGE RESTORATION --- */
+
+/* 1. Force the extracted background image onto the login page */
+html.dark-mode-active body.lambda-login {
+    background-image: url('https://ustep.ustp.edu.ph/pluginfile.php/1/theme_lambda2/login_bg_img_1/1787790906/log%20in%20page%20ustep%20copy.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* 2. Make sure the wrappers on top of the body don't block it */
+html.dark-mode-active body.lambda-login #page,
+html.dark-mode-active body.lambda-login #page-wrapper,
+html.dark-mode-active body.lambda-login #region-main,
+html.dark-mode-active body.lambda-login .wrapper-lambda {
+    background-color: transparent !important;
+    background-image: none !important; 
+}
+
+/* 3. Keep the left login form dark */
+html.dark-mode-active body.lambda-login .login-container {
+    background-color: var(--bg-main) !important;
+    border-right: 1px solid var(--border-color) !important;
+    min-height: 100vh !important;
+}
+/* ------------------------------------ */
+
+/* 4. Add a sharp, solid white outline to the login page logo */
+html.dark-mode-active #logoimage {
+    background-color: transparent !important;
+    padding: 0 !important;
+    
+    /* 4 sharp shadows (no blur) pulling in 4 different directions to form a stroke */
+    filter: 
+        drop-shadow(1px 1px 0px #ffffff) 
+        drop-shadow(-1px -1px 0px #ffffff) 
+        drop-shadow(1px -1px 0px #ffffff) 
+        drop-shadow(-1px 1px 0px #ffffff) !important;
+}
+
+/* --- RESTRICTED AVAILABILITY ALERTS --- */
+/* Target the restricted access warning boxes and their inner containers */
+html.dark-mode-active .availabilityinfo.isrestricted,
+html.dark-mode-active .availabilityinfo .showmore-container {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Ensure the text and icons inside the restriction box are readable */
+html.dark-mode-active .availabilityinfo.isrestricted *,
+html.dark-mode-active .availabilityinfo .showmore-container * {
+    color: var(--text-main) !important;
+}
+
+/* --- ACTIVITY DATES --- */
+/* Lighten the 'Opened:' and 'Due:' text under assignments */
+html.dark-mode-active .activity-dates,
+html.dark-mode-active .activity-dates strong,
+html.dark-mode-active .activity-dates span {
+    color: var(--text-main) !important;
+}
+
+/* --- GRADE REPORTS & TABLES (THE NUCLEAR OPTION) --- */
+/* Target the container and force every single element inside it to comply */
+html.dark-mode-active .user-report-container,
+html.dark-mode-active .user-report-container table.user-grade,
+html.dark-mode-active table.user-grade *,
+html.dark-mode-active table.user-grade th,
+html.dark-mode-active table.user-grade td {
+    background: var(--bg-card) !important; /* Using the shorthand 'background' kills gradients */
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Rescue the links so they don't get lost in the dark */
+html.dark-mode-active table.user-grade a {
+    background: transparent !important;
+    color: var(--text-heading) !important;
+    border: none !important;
+}
+
+/* Nuke any alternating row colors completely */
+html.dark-mode-active table.user-grade tbody tr:nth-of-type(n) {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* --- IN-COURSE HEADER --- */
+/* Override the hardcoded white background for the course title block */
+html.dark-mode-active .layout-boxed #lambda-incourse-header,
+html.dark-mode-active #lambda-incourse-header {
+    background-color: var(--bg-card) !important;
+    background-image: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Ensure the course title text inside it flips to your light heading color */
+html.dark-mode-active #lambda-incourse-header *,
+html.dark-mode-active #lambda-incourse-header h1,
+html.dark-mode-active #lambda-incourse-header h2 {
+    color: var(--text-heading) !important;
+}
+
+/* --- NOTIFICATIONS & ALERTS --- */
+/* Override the glaring pastel backgrounds for all Bootstrap alert boxes */
+html.dark-mode-active .alert {
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+/* Ensure any text or links inside the alerts match your readable colors */
+html.dark-mode-active .alert *,
+html.dark-mode-active .alert a {
+    color: var(--text-main) !important;
+}
+
+/* --- BADGES & FILTER TAGS --- */
+/* Override hardcoded light backgrounds on Bootstrap badges and autocomplete selections */
+html.dark-mode-active .badge.bg-secondary,
+html.dark-mode-active .badge.text-dark,
+html.dark-mode-active .form-autocomplete-selection .badge {
+    background-color: var(--bg-main) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main) !important;
+}
