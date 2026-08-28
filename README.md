@@ -1,3 +1,9 @@
+**Legal Disclaimer**
+
+This is an unofficial, community-built open-source project. It is not affiliated with, endorsed by, or sponsored by the University of Science and Technology of Southern Philippines (USTP) or the Management Information Systems (MIS) office.
+
+This extension only modifies the client-side CSS of the portal for accessibility purposes and does not collect, store, or transmit any user data or login credentials. "USTeP" and "PRISM" are properties of their respective owners.
+
 # USTeP Dark Mode Extension 
 
 A custom-built, polished Dark Mode browser extension for the University of Science and Technology e-Learning Portal (USTeP). Built specifically to override the stubborn Lambda2 Moodle theme, reduce eye strain during late-night coding sessions, and provide a cohesive visual experience.
@@ -35,3 +41,4 @@ University of Science and Technology of Southern Philippines (USTP)
 
 ## License
 This project is open-source and available under the MIT License.
+
